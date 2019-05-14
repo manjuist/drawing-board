@@ -15,4 +15,23 @@ module.exports = {
   },
   rules: {
   },
+ "settings": {
+    "parser": "typescript-eslint-parser",
+    "plugins": [
+      "import"
+    ],
+    "rules": {
+      // turn on errors for missing imports
+      "import/no-unresolved": "error"
+    },
+    "import/resolver": {
+      // use <root>/tsconfig.json
+      "typescript": {},
+ 
+      // use <root>/path/to/folder/tsconfig.json
+      "typescript": {
+        "directory": "/"
+      }
+    }
+  }
 };
