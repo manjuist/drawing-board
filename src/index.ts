@@ -1,3 +1,7 @@
+import getCanvasPoint from './tools';
+
+console.log(getCanvasPoint);
+
 interface Context {
     fillStyle:string;
     strokeStyle:string;
@@ -53,9 +57,7 @@ const bindMove = function move(e:any) {
   line.addPoint([pageX, pageY]);
   line.draw();
 };
-const bindUp = function up(e:any) {
-  const { pageX, pageY } = e;
-  console.log(pageX, pageY);
+const bindUp = function up() {
   drawCanvas.removeEventListener('mousemove', bindMove, false);
   drawCanvas.removeEventListener('mouseup', bindUp, false);
 };
