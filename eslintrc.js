@@ -1,6 +1,6 @@
 module.exports = {
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "sourceType":"module"
-    }
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    sourceType: 'module',
+  },
 };
