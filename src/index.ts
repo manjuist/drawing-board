@@ -1,52 +1,8 @@
-import getCanvasPoint from './tools';
-
-console.log(getCanvasPoint);
-
-interface Context {
-    fillStyle:string;
-    strokeStyle:string;
-    shadowBlur:number;
-    shadowColor:string;
-    arc:Function;
-    fill:Function;
-    beginPath:Function;
-    closePath:Function;
-    rotate:Function;
-    translate:Function;
-    fillRect:Function;
-    clearRect:Function;
-    lineTo:Function;
-    moveTo:Function;
-    stroke:Function;
-}
-
-class Line {
-  ctx: Context;
-
-  points:Array<Array<number>>;
-
-  constructor(ctx:Context, point:Array<number>) {
-    this.ctx = ctx;
-    this.points = [point];
-  }
-
-  addPoint = (point:Array<number>) => {
-    this.points.push(point);
-  }
-
-  draw = () => {
-    const { ctx, points } = this;
-    const [startPoint, ...restPoints] = points;
-    ctx.strokeStyle = '#000';
-    ctx.beginPath();
-    ctx.moveTo(...startPoint);
-    restPoints.forEach((_point) => { ctx.lineTo(..._point); });
-    ctx.stroke();
-  }
-}
+import Line from './line';
+import Context from './interfaceCollection';
 
 const drawCanvas = <HTMLCanvasElement>document.getElementById('draw');
-const drawCtx = <Context>drawCanvas.getContext('2d');
+const drawCtx: Context = <Context>drawCanvas.getContext('2d');
 
 drawCanvas.width = document.body.clientWidth;
 drawCanvas.height = document.body.clientHeight;
@@ -68,3 +24,7 @@ const bindDown = function down(e:any) {
   drawCanvas.addEventListener('mouseup', bindUp, false);
 };
 drawCanvas.addEventListener('mousedown', bindDown, false);
+window.addEventListener('resize', () => {
+  drawCanvas.width = document.body.clientWidth;
+  drawCanvas.height = document.body.clientHeight;
+}, false);
