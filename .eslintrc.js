@@ -15,5 +15,12 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
+  },
+  'settings': {
+      'import/resolver': {
+          'webpack': {
+              config:'./build/webpack.prod.config.js'
+          }
+      }
   }
 };
