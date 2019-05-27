@@ -1,0 +1,23 @@
+.dock {
+  width: 500px;
+  height: 50px;
+  display: flex;
+  border: 1px solid #000;
+  border-radius: 5px 5px 0 0;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  button {
+    flex: 1;
+    &:last-child:after {
+      content: "";
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background: #000;
+      border-radius: 8px;
+    }
+  }
+}
