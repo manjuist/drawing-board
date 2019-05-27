@@ -2,6 +2,9 @@ import React from 'react'
 import {render} from 'react-dom'
 import CanvasBoard from './components/canvas-board'
 import Drawing from './components/drawing'
+import Dock from './components/dock'
+
+import 'common/styles/index.scss'
 
 class CanvasWrapper extends React.Component{
   canvasElement:HTMLCanvasElement | null;
@@ -33,9 +36,12 @@ class CanvasWrapper extends React.Component{
 
   render(){
     const {getCanvasElement} = this
-    return (<CanvasBoard
-      getCanvasElement={getCanvasElement}
-      />)
+    return (
+      <div>
+        <CanvasBoard getCanvasElement={getCanvasElement} />
+        <Dock />
+      </div>
+    )
   }
 }
 

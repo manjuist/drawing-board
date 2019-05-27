@@ -1,23 +1,25 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const SelfPlugin = require('./plugins')
+// const SelfPlugin = require('./plugins')
 
-//const distPath = path.resolve(__dirname, '..','dist')
-const distPath = path.resolve(__dirname, '..','dist')
+const ROOT_PATH = path.resolve(__dirname, '..')
+const DIST_PATH = path.resolve(ROOT_PATH, 'dist')
 
 module.exports = {
-  // Change to your "entry-point".
   devtool: 'source-map',
   entry: {
     app: './src/app.tsx',
   },
   output: {
-    path: distPath,
+    path: DIST_PATH,
     filename: '[name].js',
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
+    alias:{
+      common: path.resolve(ROOT_PATH, 'src/common')
+    }
   },
   module: {
     rules: [{
@@ -36,6 +38,9 @@ module.exports = {
         'css-loader',
         'sass-loader',
       ],
+    },{
+      test: /\.(woff|woff2|otf|ttf|eot|svg)$/,
+      loader: 'url-loader'
     }],
   },
   //externals: {
@@ -43,11 +48,12 @@ module.exports = {
     //"react-dom":"ReactDOM"
   //},
   devServer: {
-    contentBase: distPath,
+    contentBase: DIST_PATH,
     compress: true,
     port: 9000,
   },
   plugins: [
+    // new SelfPlugin(),
     new HtmlWebpackPlugin({
       title: 'index',
       inject: true,
@@ -56,7 +62,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
       chunkFilename: '[name].css',
-    }),
-    new SelfPlugin()
+    })
   ],
 };
