@@ -1,8 +1,8 @@
 import React from 'react'
 import {render} from 'react-dom'
-import CanvasBoard from './components/canvas-board'
-import Drawing from './components/drawing'
-import Dock from './components/dock'
+import CanvasBoard from './canvas-board'
+import Drawing from './drawing'
+import Dock from './dock'
 
 import 'common/styles/index.scss'
 
