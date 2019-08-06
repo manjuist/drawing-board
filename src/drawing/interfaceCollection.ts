@@ -14,4 +14,5 @@ export default interface Context {
     lineTo:Function;
     moveTo:Function;
     stroke:Function;
+    drawImage:Function;
 }

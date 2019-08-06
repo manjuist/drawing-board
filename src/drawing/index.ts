@@ -1,4 +1,5 @@
 import Line from './line';
+import Picture from './picture';
 import Context from './interfaceCollection';
 
 class Drawing {
