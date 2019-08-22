@@ -2,25 +2,33 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    node: true,
   },
-  extends: 'airbnb-base',
+  extends: [
+    'airbnb',
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
-  parser: [
-    "@typescript-eslint/parser",
-    "@typescript-eslint/eslint-plugin"
-  ],
+  parser: "@typescript-eslint/parser",
   parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  'settings': {
+  settings: {
       'import/resolver': {
           'webpack': {
-              config:'./build/webpack.prod.config.js'
+              config:'./build/webpack.config.js'
           }
       }
-  }
+  },
+  plugins: [
+    'react',
+  ],
+  rules: {
+  },
 };
