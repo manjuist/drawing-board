@@ -1,24 +1,27 @@
-import Line from './line';
-import Picture from './picture';
-import Context from './interfaceCollection';
+import Line from '../line';
+import Context from '../interfaceCollection';
 
 class Drawing {
   drawCanvas: HTMLCanvasElement;
+
   drawContext: Context;
 
-  constructor(drawCanvas:HTMLCanvasElement){
+  currentMode: String;
+
+  constructor(drawCanvas:HTMLCanvasElement) {
     this.drawCanvas = <HTMLCanvasElement>drawCanvas;
     this.drawContext = <Context>drawCanvas.getContext('2d');
+    this.currentMode = 'line';
   }
 
-  size = ({width, height}:{width: number, height:number}) => {
-    const {drawCanvas} = this
+  size = ({ width, height }:{ width: number, height: number }) => {
+    const { drawCanvas } = this;
     drawCanvas.width = width;
     drawCanvas.height = height;
   }
 
   init = () => {
-    const {drawCanvas, drawContext} = this
+    const { drawCanvas, drawContext } = this;
     let line:Line;
     const bindMove = function move(e:any) {
       const { pageX, pageY } = e;
@@ -47,4 +50,4 @@ class Drawing {
   }
 }
 
-export default Drawing
+export default Drawing;

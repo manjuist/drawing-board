@@ -1,12 +1,13 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const SelfPlugin = require('./plugins')
 
 const ROOT_PATH = path.resolve(__dirname, '..');
 const DIST_PATH = path.resolve(ROOT_PATH, 'dist');
+const mode = process.env.NODE_ENV
 
 module.exports = {
+  mode,
   devtool: 'source-map',
   entry: {
     app: './src/app.tsx',

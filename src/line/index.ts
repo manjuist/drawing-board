@@ -1,4 +1,4 @@
-import Context from './interfaceCollection';
+import Context from '../interfaceCollection';
 
 class Line {
   ctx: Context;
@@ -7,13 +7,9 @@ class Line {
 
   points:Array<Array<number>>;
 
-  constructor(ctx:Context, point:Array<number>) {
+  constructor(ctx:Context, point:Array<number>, color = '#000') {
     this.ctx = ctx;
     this.points = [point];
-    this.color = '#000';
-  }
-
-  changeColor = (color:string) => {
     this.color = color;
   }
 

@@ -1,5 +1,5 @@
-import React from 'react'
-import './canvas-board.scss'
+import React from 'react';
+import './canvas-board.scss';
 
 interface Props {
   getCanvasElement:Function;
@@ -8,20 +8,22 @@ interface Props {
 class CanvasBoard extends React.Component<Props, {}> {
   canvasElement = React.createRef<HTMLCanvasElement>()
 
-  componentDidMount(){
-    const { 
+  componentDidMount() {
+    const {
       canvasElement,
-      props:{ getCanvasElement },
-    } = this
-    getCanvasElement(canvasElement.current)
+      props: { getCanvasElement },
+    } = this;
+    getCanvasElement(canvasElement.current);
   }
 
-  render(){
-    return (<canvas 
-      id="draw" 
-      ref={this.canvasElement}
-      />)
+  render() {
+    return (
+      <canvas
+        id="draw"
+        ref={this.canvasElement}
+      />
+    );
   }
 }
 
-export default CanvasBoard
+export default CanvasBoard;
