@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import CanvasBoard from './canvas-board';
 import Drawing from './drawing';
 import Dock from './dock';
+import Line from './line';
 
 import 'common/styles/index.scss';
 
@@ -25,7 +26,7 @@ class CanvasWrapper extends React.Component {
         width: document.body.clientWidth,
         height: document.body.clientHeight,
       });
-      this.drawingInstance.init();
+      this.drawingInstance.init(Line);
     }
   }
 
@@ -37,7 +38,9 @@ class CanvasWrapper extends React.Component {
     const { getCanvasElement } = this;
     return (
       <div>
-        <CanvasBoard getCanvasElement={getCanvasElement} />
+        <CanvasBoard
+          getCanvasElement={getCanvasElement}
+        />
         <Dock />
       </div>
     );

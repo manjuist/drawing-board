@@ -16,3 +16,31 @@ export default interface Context {
     stroke:Function;
     drawImage:Function;
 }
+
+export interface LineContext {
+    strokeStyle:string;
+    beginPath:Function;
+    moveTo:Function;
+    lineTo:Function;
+    stroke:Function;
+}
+
+export interface ImageContext {
+    fillStyle:string;
+    shadowBlur:number;
+    shadowColor:string;
+    arc:Function;
+    fill:Function;
+    closePath:Function;
+    rotate:Function;
+    translate:Function;
+    fillRect:Function;
+    clearRect:Function;
+    drawImage:Function;
+}
+
+export interface DrawingInstance {
+  addPoint: Function;
+  draw: Function;
+  handle: Function;
+}

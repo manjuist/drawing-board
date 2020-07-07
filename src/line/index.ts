@@ -17,7 +17,12 @@ class Line {
     this.points.push(point);
   }
 
-  draw = () => {
+  draw = (pageX: number, pageY: number) => {
+    this.addPoint([pageX, pageY]);
+    this.handle();
+  }
+
+  handle = () => {
     const { ctx, points, color } = this;
     const [startPoint, ...restPoints] = points;
     ctx.strokeStyle = color;

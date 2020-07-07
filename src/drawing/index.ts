@@ -1,5 +1,4 @@
-import Line from '../line';
-import Context from '../interfaceCollection';
+import Context, { DrawingInstance } from '../interfaceCollection';
 
 class Drawing {
   drawCanvas: HTMLCanvasElement;
@@ -20,13 +19,16 @@ class Drawing {
     drawCanvas.height = height;
   }
 
-  init = () => {
+  bindEvent = () => {
+
+  }
+
+  init = (CurrentDrawing) => {
     const { drawCanvas, drawContext } = this;
-    let line:Line;
+    let handler: DrawingInstance;
     const bindMove = function move(e:any) {
       const { pageX, pageY } = e;
-      line.addPoint([pageX, pageY]);
-      line.draw();
+      handler.draw(pageX, pageY);
     };
     const bindUp = function up() {
       drawCanvas.removeEventListener('mousemove', bindMove, false);
@@ -34,7 +36,7 @@ class Drawing {
     };
     const bindDown = function down(e:any) {
       const { pageX, pageY } = e;
-      line = new Line(drawContext, [pageX, pageY]);
+      handler = new CurrentDrawing(drawContext, [pageX, pageY]);
       drawCanvas.addEventListener('mousemove', bindMove, false);
       drawCanvas.addEventListener('mouseup', bindUp, false);
     };
