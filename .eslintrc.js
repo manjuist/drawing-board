@@ -4,7 +4,8 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: [
+  extends: [ 
+    'plugin:react/recommended',
     'airbnb',
   ],
   globals: {
@@ -13,9 +14,7 @@ module.exports = {
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
+    ecmaFeatures: { jsx: true, },
     ecmaVersion: 2018,
     sourceType: 'module',
   },
@@ -29,7 +28,5 @@ module.exports = {
   plugins: [
     'react',
     '@typescript-eslint',
-  ],
-  rules: {
-  },
+  ]
 };
