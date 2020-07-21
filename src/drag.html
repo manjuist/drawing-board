@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+* {padding:0;margin:0}
+    </style>
+  </head>
+  <body>
+    <canvas width=1000 height=1000></canvas>
+    <script>
+      let curRect = undefined
+      let handle = false
+      const cvs = document.querySelector('canvas');
+      const ctx = cvs.getContext('2d');
+      let rectList = [
+        {x:10,y:10,w:100,h:100},
+        {x:60,y:60,w:100,h:100},
+        {x:200,y:100, w:100,h:100}
+      ]
+      /*
+       */
+      function r(m,n){
+        return Math.random()*(n-m+1)+m
+      }
+      while(rectList.length<100){
+        rectList.push({x:r(0, 900),y:r(0, 900), w: 100, h: 100})
+      }
+      /*
+       */
+
+      function drawRect({ callback,x,y,w,h,color}){
+        ctx.strokeStyle=color || 'black'
+        ctx.beginPath()
+        ctx.rect(x,y,w,h)
+        callback && callback()
+        ctx.stroke()
+        ctx.closePath()
+      }
+
+      function clear(){
+        const {width, height} = ctx.canvas
+        ctx.clearRect(0,0,width,height)
+      }
+
+      function isPath({x,y}){
+        return ctx.isPointInPath(x, y)
+      }
+
+      function highLight(ind){
+        if(ind === curRect){
+          ctx.strokeStyle="red"
+        }
+      }
+
+      function setCur(ind){
+        if(!handle){
+          curRect = ind
+        }
+      }
+
+      function cb({x,y, ind}){
+        if(isPath({x,y})){
+          setCur(ind)
+          handle = true
+          highLight(ind)
+        }
+      }
+
+      rectList.forEach(cur=>{drawRect({...cur})})
+
+      function mousedownCallback({pageX, pageY}){
+        document.body.addEventListener('mousemove', window.mdcb=mousemoveCallback({
+          startX:pageX,
+          startY:pageY
+        }), false)
+        document.body.addEventListener('mouseup', window.mucb=mouseupCallback({
+          startX:pageX,
+          startY:pageY
+        }), false)
+        clear()
+        rectList.forEach((cur, ind)=>{drawRect({
+          ...cur,
+          callback:function(){cb({x:pageX, y:pageY, ind})},
+        })})
+      }
+      function mousemoveCallback({startX, startY}){
+        return function({pageX, pageY}){
+          clear()
+          rectList.forEach((cur, ind)=>{
+            if(ind === curRect){
+              drawRect({
+                ...cur,
+                x:cur.x+(pageX - startX),
+                y:cur.y+(pageY - startY),
+                callback:function(){cb({x:pageX, y:pageY, ind})}
+              })
+            }else{
+              drawRect({
+                ...cur,
+                callback:function(){cb({x:pageX, y:pageY, ind})}
+              })
+            }
+          })
+        }
+      }
+      function mouseupCallback({startX, startY}){
+        return function ({pageX, pageY}){
+          document.body.removeEventListener('mousemove', window.mdcb)
+          document.body.removeEventListener('mouseup', window.mucb)
+          rectList.forEach((cur, ind)=>{
+            if(ind === curRect){
+              cur.x=cur.x+(pageX - startX)
+              cur.y=cur.y+(pageY - startY)
+            }
+          })
+          curRect = undefined
+          handle = false
+        }
+      }
+      document.oncontextmenu = e => {
+        e.preventDefault();
+        console.log(e)
+      }
+      document.body.addEventListener('mousedown', mousedownCallback, false)
+    </script>
+  </body>
+</html>
