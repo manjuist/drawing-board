@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    * {margin:0;padding:0}
+  canvas {
+    letter-spacing: 20px;
+  }
+  </style>
+</head>
+<body>
+  <canvas width=1000 height=500></canvas>
+  <script>
+    const cvs = document.querySelector('canvas');
+    const ctx = cvs.getContext('2d');
+    const maxWidth = 100;
+    const tx =
+      'ofwjoiejfsoadfjsadjflasdjflsadjfasjdfljasdlfjalsjflasdjfsajdfoiwejfosdaijfsadjfoisadjfoisadjfoisadjfoiasdjfoisadjfoisajf'
+    const txArr = tx.split('');
+    const txLen = txArr.length;
+    let x = 100;
+    let y = 100;
+    let line = '';
+    for(let i=0; i< txLen; i++){
+      const newLine = line + txArr[i];
+      let measureTextWidth = ctx.measureText(newLine).width
+      if(measureTextWidth >= maxWidth){
+        ctx.fillText(newLine, x, y)
+        y += 20
+        line = txArr[i]
+      }else{
+        line = newLine
+      }
+    }
+    ctx.fillText(line, x, y)
+  </script>
+</body>
+</html>
